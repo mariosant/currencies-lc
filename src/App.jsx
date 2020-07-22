@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useStoreon } from 'storeon/react'
-import { Box, Flex, Stack, IconButton, Text } from '@chakra-ui/core'
+import { Box, Flex, Stack, IconButton, Text, Link } from '@chakra-ui/core'
 import colors from '@livechat/design-system-colors'
 import CurrencyCard from './components/currency-card'
 
@@ -39,7 +39,7 @@ const App = () => {
 			</Stack>
 			<Box>
 				<Text fontSize="sm" color="gray.500">
-					Lorem ipsum? Dorcet sit amet.
+					Join our <Link href="https://spectrum.chat/currencies-for-lc" target="_blank">Spectrum community</Link> for feedback & support
 				</Text>
 			</Box>
 		</Flex>
