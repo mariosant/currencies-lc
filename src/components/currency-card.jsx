@@ -22,6 +22,8 @@ import find from 'ramda/es/find'
 import prop from 'ramda/es/prop'
 import pipe from 'ramda/es/pipe'
 import TimeAgo from 'react-timeago'
+import CurrecyPicker from './currency-picker'
+import CurrencyPicker from './currency-picker'
 
 const { gray500, gray200 } = colors
 
@@ -37,24 +39,7 @@ const CurrencyInput = ({
 	return (
 		<Stack spacing={1} {...props}>
 			<Flex justifyContent="space-between">
-				<Menu>
-					<MenuButton
-						as={Button}
-						rightIcon="chevron-down"
-						fontSize="12px"
-						variant="unstyled"
-						height="20px"
-					>
-						{currency}
-					</MenuButton>
-					<MenuList>
-						{rates.map(({ name }) => (
-							<MenuItem key={name} onClick={() => onCurrencyChange(name)}>
-								{name}
-							</MenuItem>
-						))}
-					</MenuList>
-				</Menu>
+				<CurrencyPicker onChange={onCurrencyChange} currency={currency} />
 			</Flex>
 
 			<NumberFormat
