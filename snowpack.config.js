@@ -7,4 +7,8 @@ module.exports = {
 			plugins: [require('rollup-plugin-node-polyfills')()],
 		},
 	},
+	devOptions: {
+		open: 'none',
+		out: 'build'
+	}
 }

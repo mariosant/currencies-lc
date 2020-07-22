@@ -32,7 +32,7 @@ const CurrencyInput = ({
 	onValueChange,
 	...props
 }) => {
-    const {rates} = useStoreon('rates')
+	const { rates } = useStoreon('rates')
 
 	return (
 		<Stack spacing={1} {...props}>
@@ -48,11 +48,11 @@ const CurrencyInput = ({
 						{currency}
 					</MenuButton>
 					<MenuList>
-                        {
-                            rates.map(({name}) => (
-                                <MenuItem key={name} onClick={() => onCurrencyChange(name)}>{name}</MenuItem>
-                            ))
-                        }
+						{rates.map(({ name }) => (
+							<MenuItem key={name} onClick={() => onCurrencyChange(name)}>
+								{name}
+							</MenuItem>
+						))}
 					</MenuList>
 				</Menu>
 			</Flex>
@@ -82,18 +82,20 @@ const CurrencyCard = ({ card, ...props }) => {
 
 	const removeCard = () => dispatch('cards/remove', card.id)
 	const duplicateCard = () => dispatch('cards/duplicate', card.id)
-    
-    const onValueChange = (currency) => ({ target }) => dispatch('cards/amount', {
-        currency,
-        id: card.id,
-        amount: Number(target.value),
-    })
-    
-    const onCurrencyChange = index => (currency) => dispatch('cards/currency', {
-        index,
-        currency,
-        id: card.id,
-    })
+
+	const onValueChange = (currency) => ({ target }) =>
+		dispatch('cards/amount', {
+			currency,
+			id: card.id,
+			amount: Number(target.value),
+		})
+
+	const onCurrencyChange = (index) => (currency) =>
+		dispatch('cards/currency', {
+			index,
+			currency,
+			id: card.id,
+		})
 
 	const getCurrencyRate = getRate(rates)
 
@@ -126,7 +128,7 @@ const CurrencyCard = ({ card, ...props }) => {
 			<Stack spacing={3}>
 				{card.currencies.map((currency, i) => (
 					<CurrencyInput
-                        key={currency}
+						key={currency}
 						currency={currency}
 						value={getCurrencyRate(currency) * card.amount}
 						onValueChange={onValueChange(currency)}

@@ -2,6 +2,7 @@ import { createElement } from 'react'
 import { createStoreon } from 'storeon'
 import { StoreContext } from 'storeon/react'
 import { storeonLogger } from 'storeon/devtools'
+import cards from './store-modules/cards.js'
 import currencies from './store-modules/currencies.js'
 
 const {
@@ -9,7 +10,7 @@ const {
 	SNOWPACK_PUBLIC_AUTH0_DOMAIN,
 } = import.meta.env
 
-const store = createStoreon([storeonLogger, currencies])
+const store = createStoreon([storeonLogger, cards, currencies])
 
 window.store = store
 

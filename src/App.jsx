@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useStoreon } from 'storeon/react'
 import { Box, Flex, Stack, IconButton, Text } from '@chakra-ui/core'
 import colors from '@livechat/design-system-colors'
@@ -12,6 +12,10 @@ const App = () => {
 	const Cards = cards.map((card) => {
 		return <CurrencyCard key={card.id} card={card} />
 	})
+
+	useEffect(() => {
+		dispatch('currencies/fetch')
+	}, [])
 
 	return (
 		<Flex
