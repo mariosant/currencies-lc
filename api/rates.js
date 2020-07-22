@@ -3,7 +3,7 @@ const axios = require('axios')
 const FIXER_KEY = process.env['FIXER_KEY']
 const ratesUrl = `http://data.fixer.io/api/latest?access_key=${FIXER_KEY}&base=EUR`
 
-const getData = () => axios.get(ratesUrl).json()
+const getData = () => axios.get(ratesUrl)
 
 module.exports = async (req, res) => {
 	const { data } = await getData()
@@ -12,6 +12,6 @@ module.exports = async (req, res) => {
 
 	res.json({
 		...data,
-		timestamp: data.timestamp,
+		timestamp: data.timestamp * 1000,
 	})
 }
