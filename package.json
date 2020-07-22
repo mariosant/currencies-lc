@@ -1,0 +1,38 @@
+{
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "jest",
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "lint": "prettier --check \"src/**/*.{js,jsx}\""
+  },
+  "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@livechat/design-system": "^0.9.1",
+    "@livechat/design-system-colors": "^1.1.1",
+    "@storeon/router": "^1.2.0",
+    "emotion-theming": "^10.0.27",
+    "nanoid": "^3.1.10",
+    "ramda": "^0.27.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-number-format": "^4.4.1",
+    "react-timeago": "^4.4.0",
+    "storeon": "^3.0.3"
+  },
+  "devDependencies": {
+    "@snowpack/app-scripts-react": "^1.4.0",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.3",
+    "babel-plugin-transform-node-env-inline": "^0.4.3",
+    "jest": "^25.4.0",
+    "miragejs": "^0.1.40",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.0.5",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "snowpack": "^2.6.4",
+    "vercel": "^19.2.0"
+  }
+}

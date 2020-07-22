@@ -1,0 +1,10 @@
+node_modules/
+static/sw.js
+.next
+*-error.log
+*lock.json
+yarn.lock
+.build
+build
+web_modules
+.vercel
