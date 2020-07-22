@@ -186,7 +186,7 @@ const getData = () =>
 		  }
 
 module.exports = async (req, res) => {
-	const {data} = await getData()
+	const { data } = await getData()
 
 	res.setHeader('Cache-Control', 's-maxage=3600')
 
