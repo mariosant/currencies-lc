@@ -26,7 +26,7 @@ import pipe from 'ramda/es/pipe'
 import TimeAgo from 'react-timeago'
 import CurrencyPicker from './currency-picker'
 
-const { gray500, gray200 } = colors
+const { gray500, gray100 } = colors
 
 const CurrencyInput = ({
 	currency,
@@ -103,8 +103,8 @@ const CurrencyCard = ({ card, ...props }) => {
 			position="relative"
 			bg="white"
 			p={3}
-			border={`1px solid ${gray200}`}
-			borderRadius={4}
+			border="1px solid #dde2e6"
+			borderRadius="lg"
 			{...props}
 		>
 			<Stack spacing={3}>
