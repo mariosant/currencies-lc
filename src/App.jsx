@@ -7,11 +7,7 @@ import CurrencyCard from './components/currency-card'
 const { blue50 } = colors
 
 const App = () => {
-	const { cards, rates, dispatch } = useStoreon('cards', 'rates')
-
-	const Cards = cards.map((card) => {
-		return <CurrencyCard key={card.id} card={card} />
-	})
+	const { card, rates, dispatch } = useStoreon('card', 'rates')
 
 	useEffect(() => {
 		dispatch('currencies/fetch')
@@ -25,21 +21,25 @@ const App = () => {
 			bg={blue50}
 			minHeight="100vh"
 		>
-			<Stack spacing={3}>
-				{Cards}
+			<Stack spacing={5}>
+				<CurrencyCard card={card} />
 				<Box textAlign="center">
 					<IconButton
 						isRound
-						size="lg"
+						size="md"
 						icon="small-add"
 						bg="white"
-						onClick={() => dispatch('cards/add')}
+						onClick={() => dispatch('card/add')}
 					/>
 				</Box>
 			</Stack>
 			<Box>
 				<Text fontSize="sm" color="gray.500">
-					Join our <Link href="https://spectrum.chat/currencies-for-lc" target="_blank">Spectrum community</Link> for feedback & support
+					Join our{' '}
+					<Link href="https://spectrum.chat/currencies-for-lc" target="_blank">
+						Spectrum community
+					</Link>{' '}
+					for feedback & support
 				</Text>
 			</Box>
 		</Flex>
