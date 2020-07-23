@@ -12,8 +12,7 @@ import {
 } from '@chakra-ui/core'
 import { take, toLower } from 'ramda'
 
-const CurrencyPicker = ({ currency, onChange }) => {
-	const { rates } = useStoreon('rates')
+const CurrencyPicker = ({ rates, currency, onChange }) => {
 	const favorites = ['EUR', 'USD', 'GBP', 'CAD']
 
 	return (
@@ -28,8 +27,10 @@ const CurrencyPicker = ({ currency, onChange }) => {
 				{currency}
 			</MenuButton>
 			<MenuList maxHeight={350} overflowY="auto">
-				{favorites.map((r) => (
-					<MenuItem onClick={() => onChange(r)}>{r}</MenuItem>
+				{favorites.map((rate) => (
+					<MenuItem key={rate} onClick={() => onChange(rate)}>
+						{rate}
+					</MenuItem>
 				))}
 				<MenuDivider borderColor="#ccc" />
 				{rates.map(({ name }) => (

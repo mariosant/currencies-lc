@@ -6,6 +6,8 @@ import {
 	Flex,
 	IconButton,
 	Input,
+	InputGroup,
+	InputRightElement,
 	Select,
 	Stack,
 	Divider,
@@ -22,7 +24,6 @@ import find from 'ramda/es/find'
 import prop from 'ramda/es/prop'
 import pipe from 'ramda/es/pipe'
 import TimeAgo from 'react-timeago'
-import CurrecyPicker from './currency-picker'
 import CurrencyPicker from './currency-picker'
 
 const { gray500, gray200 } = colors
@@ -32,29 +33,45 @@ const CurrencyInput = ({
 	value,
 	onCurrencyChange,
 	onValueChange,
+	onRemove,
 	...props
 }) => {
-	const { rates } = useStoreon('rates')
+	const { rates } = useStoreon('card', 'rates')
 
 	return (
 		<Stack spacing={1} {...props}>
 			<Flex justifyContent="space-between">
-				<CurrencyPicker onChange={onCurrencyChange} currency={currency} />
+				<CurrencyPicker
+					rates={rates}
+					onChange={onCurrencyChange}
+					currency={currency}
+				/>
 			</Flex>
 
-			<NumberFormat
-				fixedDecimalScale
-				decimalScale={2}
-				customInput={Input}
-				variant="flushed"
-				size="lg"
-				value={value}
-				boxSizing="border-box"
-				border="none"
-				fontSize={36}
-				p={0}
-				onChange={onValueChange}
-			/>
+			<InputGroup>
+				<NumberFormat
+					fixedDecimalScale
+					decimalScale={2}
+					customInput={Input}
+					variant="flushed"
+					size="lg"
+					value={value}
+					boxSizing="border-box"
+					border="none"
+					fontSize={36}
+					p={0}
+					onChange={onValueChange}
+				/>
+				<InputRightElement>
+					<IconButton
+						icon="close"
+						size="sm"
+						variant="ghost"
+						variantColor="red"
+						onClick={onRemove}
+					/>
+				</InputRightElement>
+			</InputGroup>
 		</Stack>
 	)
 }
@@ -65,22 +82,19 @@ const getRate = (rates) => (currency) =>
 const CurrencyCard = ({ card, ...props }) => {
 	const { rates, updatedAt, dispatch } = useStoreon('rates', 'updatedAt')
 
-	const removeCard = () => dispatch('cards/remove', card.id)
-	const duplicateCard = () => dispatch('cards/duplicate', card.id)
-
 	const onValueChange = (currency) => ({ target }) =>
-		dispatch('cards/amount', {
+		dispatch('card/amount', {
 			currency,
-			id: card.id,
 			amount: Number(target.value),
 		})
 
 	const onCurrencyChange = (index) => (currency) =>
-		dispatch('cards/currency', {
+		dispatch('card/currency', {
 			index,
 			currency,
-			id: card.id,
 		})
+
+	const onRemove = (index) => () => dispatch('card/remove', index)
 
 	const getCurrencyRate = getRate(rates)
 
@@ -93,31 +107,15 @@ const CurrencyCard = ({ card, ...props }) => {
 			borderRadius={4}
 			{...props}
 		>
-			<Menu mb={3}>
-				<MenuButton
-					as={IconButton}
-					variant="ghost"
-					fontSize="12px"
-					icon="settings"
-					p={2}
-					position="absolute"
-					right="0.5rem"
-					top="0.5rem"
-					zIndex={9999999999}
-				></MenuButton>
-				<MenuList>
-					<MenuItem onClick={duplicateCard}>Duplicate</MenuItem>
-					<MenuItem onClick={removeCard}>Delete</MenuItem>
-				</MenuList>
-			</Menu>
 			<Stack spacing={3}>
 				{card.currencies.map((currency, i) => (
 					<CurrencyInput
-						key={currency}
+						key={currency + i}
 						currency={currency}
 						value={getCurrencyRate(currency) * card.amount}
 						onValueChange={onValueChange(currency)}
 						onCurrencyChange={onCurrencyChange(i)}
+						onRemove={onRemove(i)}
 					/>
 				))}
 			</Stack>
