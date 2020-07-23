@@ -9,10 +9,6 @@ const { blue50 } = colors
 const App = () => {
 	const { card, rates, dispatch } = useStoreon('card', 'rates')
 
-	useEffect(() => {
-		dispatch('currencies/fetch')
-	}, [])
-
 	return (
 		<Flex
 			flexDir="column"
@@ -28,8 +24,8 @@ const App = () => {
 						isRound
 						size="md"
 						icon="small-add"
-                        bg="white"
-                        variant="outline"
+						bg="white"
+						variant="outline"
 						onClick={() => dispatch('card/add')}
 					/>
 				</Box>

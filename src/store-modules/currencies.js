@@ -8,13 +8,19 @@ import ky from 'ky'
 const currencies = (store) => {
 	// Base currency is always EUR
 
-	store.on('@init', () => ({
-		rates: [
-			{ name: 'EUR', rate: 1.0 },
-			{ name: 'USD', rate: 1 },
-		],
-		updatedAt: Date.now(),
-	}))
+	store.on('@init', () => {
+		store.dispatch('currencies/fetch')
+
+		setInterval(() => store.dispatch('currencies/fetch'), 10 * 60 * 1000)
+
+		return {
+			rates: [
+				{ name: 'EUR', rate: 1.0 },
+				{ name: 'USD', rate: 1 },
+			],
+			updatedAt: Date.now(),
+		}
+	})
 
 	store.on('currencies/set', (_, { rates, updatedAt }) => ({
 		rates,

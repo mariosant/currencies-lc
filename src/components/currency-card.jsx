@@ -2,20 +2,14 @@ import React from 'react'
 import { useStoreon } from 'storeon/react'
 import {
 	Box,
-	Button,
 	Flex,
 	IconButton,
 	Input,
 	InputGroup,
 	InputRightElement,
-	Select,
 	Stack,
 	Divider,
 	Text,
-	Menu,
-	MenuButton,
-	MenuList,
-	MenuItem,
 } from '@chakra-ui/core'
 import NumberFormat from 'react-number-format'
 import colors from '@livechat/design-system-colors'
@@ -26,7 +20,7 @@ import pipe from 'ramda/es/pipe'
 import TimeAgo from 'react-timeago'
 import CurrencyPicker from './currency-picker'
 
-const { gray500, gray100 } = colors
+const { gray500 } = colors
 
 const CurrencyInput = ({
 	currency,

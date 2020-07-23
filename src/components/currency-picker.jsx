@@ -1,16 +1,13 @@
 import React from 'react'
 import { useStoreon } from 'storeon/react'
 import {
-	Box,
 	MenuButton,
 	Menu,
 	Button,
 	MenuList,
 	MenuItem,
 	MenuDivider,
-	Input,
 } from '@chakra-ui/core'
-import { take, toLower } from 'ramda'
 
 const CurrencyPicker = ({ rates, currency, onChange }) => {
 	const favorites = ['EUR', 'USD', 'GBP', 'CAD']
