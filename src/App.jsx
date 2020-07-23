@@ -18,7 +18,7 @@ const App = () => {
 			flexDir="column"
 			justifyContent="space-between"
 			p={3}
-			bg={blue50}
+			bg="#f3f7f9"
 			minHeight="100vh"
 		>
 			<Stack spacing={5}>
@@ -28,7 +28,8 @@ const App = () => {
 						isRound
 						size="md"
 						icon="small-add"
-						bg="white"
+                        bg="white"
+                        variant="outline"
 						onClick={() => dispatch('card/add')}
 					/>
 				</Box>
