@@ -11,6 +11,7 @@
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@livechat/accounts-sdk": "^1.4.0",
     "@livechat/design-system": "^0.9.1",
     "@livechat/design-system-colors": "^1.1.1",
     "@storeon/router": "^1.2.0",

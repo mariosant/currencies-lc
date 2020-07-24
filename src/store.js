@@ -4,10 +4,16 @@ import { StoreContext } from 'storeon/react'
 import { storeonLogger } from 'storeon/devtools'
 import card from './store-modules/card.js'
 import currencies from './store-modules/currencies.js'
+import auth from './store-modules/auth.js'
 
 const { SNOWPACK_PUBLIC_PRODUCTION } = import.meta.env
 
-const plugins = [!SNOWPACK_PUBLIC_PRODUCTION && storeonLogger, card, currencies]
+const plugins = [
+	!SNOWPACK_PUBLIC_PRODUCTION && storeonLogger,
+	auth,
+	card,
+	currencies,
+]
 
 const store = createStoreon(plugins)
 
