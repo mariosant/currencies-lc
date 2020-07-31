@@ -1,5 +1,6 @@
 import React from 'react'
 import { useStoreon } from 'storeon/react'
+import useTimeAgo from '@rooks/use-time-ago'
 import {
 	Box,
 	Flex,
@@ -17,7 +18,6 @@ import propEq from 'ramda/es/propEq'
 import find from 'ramda/es/find'
 import prop from 'ramda/es/prop'
 import pipe from 'ramda/es/pipe'
-import TimeAgo from 'react-timeago'
 import CurrencyPicker from './currency-picker'
 
 const { gray500 } = colors
@@ -52,7 +52,7 @@ const CurrencyInput = ({
 					value={value}
 					boxSizing="border-box"
 					border="none"
-					fontSize={36}
+					fontSize="3xl"
 					p={0}
 					onChange={onValueChange}
 				/>
@@ -92,12 +92,13 @@ const CurrencyCard = ({ card, ...props }) => {
 
 	const getCurrencyRate = getRate(rates)
 
+    const timeAgo = useTimeAgo(updatedAt);
 	return (
 		<Box
 			position="relative"
 			bg="white"
 			p={3}
-			border="1px solid #dde2e6"
+			border="1px"
 			borderRadius="lg"
 			{...props}
 		>
@@ -115,9 +116,9 @@ const CurrencyCard = ({ card, ...props }) => {
 			</Stack>
 
 			<Divider />
-
-			<Text fontSize="sm" color={gray500}>
-				Last updated <TimeAgo date={updatedAt} />
+            
+			<Text fontSize="sm" color="gray.500">
+				Last updated {timeAgo}
 			</Text>
 		</Box>
 	)

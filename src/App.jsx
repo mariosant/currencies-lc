@@ -14,7 +14,7 @@ const App = () => {
 			flexDir="column"
 			justifyContent="space-between"
 			p={3}
-			bg="#f3f7f9"
+			bg="bodyBackground"
 			minHeight="100vh"
 		>
 			<Stack spacing={5}>
@@ -25,13 +25,14 @@ const App = () => {
 						size="md"
 						icon="small-add"
 						bg="white"
+						color="gray.500"
 						variant="outline"
 						onClick={() => dispatch('card/add')}
 					/>
 				</Box>
 			</Stack>
 			<Box>
-				<Text fontSize="sm" color="gray.500">
+				<Text fontSize="sm" color="gray.400">
 					Join our{' '}
 					<Link href="https://spectrum.chat/currencies-for-lc" target="_blank">
 						Spectrum community
