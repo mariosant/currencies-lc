@@ -14,6 +14,7 @@
     "@livechat/accounts-sdk": "^1.4.0",
     "@livechat/design-system": "^0.9.1",
     "@livechat/design-system-colors": "^1.1.1",
+    "@rooks/use-time-ago": "^3.6.0",
     "@storeon/router": "^1.2.0",
     "axios": "^0.19.2",
     "emotion-theming": "^10.0.27",
