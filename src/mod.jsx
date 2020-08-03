@@ -1,23 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { ThemeProvider, CSSReset } from '@chakra-ui/core'
-import { StoreProvider } from './store.js'
+import { hydrate, render } from 'react-dom'
 import App from './App.jsx'
-import theme from './theme.js'
 
-ReactDOM.render(
-	<React.StrictMode>
-		<ThemeProvider theme={theme}>
-			<>
-				<CSSReset />
-				<StoreProvider>
-					<App />
-				</StoreProvider>
-			</>
-		</ThemeProvider>
-	</React.StrictMode>,
-	document.getElementById('root')
-)
+const rootElement = document.getElementById('root')
+
+if (rootElement.hasChildNodes()) {
+	hydrate(<App />, rootElement)
+} else {
+	render(<App />, rootElement)
+}
 
 // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
 // Learn more: https://www.snowpack.dev/#hot-module-replacement
