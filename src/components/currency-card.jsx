@@ -13,14 +13,11 @@ import {
 	Text,
 } from '@chakra-ui/core'
 import NumberFormat from 'react-number-format'
-import colors from '@livechat/design-system-colors'
 import propEq from 'ramda/es/propEq'
 import find from 'ramda/es/find'
 import prop from 'ramda/es/prop'
 import pipe from 'ramda/es/pipe'
 import CurrencyPicker from './currency-picker'
-
-const { gray500 } = colors
 
 const CurrencyInput = ({
 	currency,
@@ -92,7 +89,7 @@ const CurrencyCard = ({ card, ...props }) => {
 
 	const getCurrencyRate = getRate(rates)
 
-    const timeAgo = useTimeAgo(updatedAt);
+	const timeAgo = useTimeAgo(updatedAt)
 	return (
 		<Box
 			position="relative"
@@ -116,7 +113,7 @@ const CurrencyCard = ({ card, ...props }) => {
 			</Stack>
 
 			<Divider />
-            
+
 			<Text fontSize="sm" color="gray.500">
 				Last updated {timeAgo}
 			</Text>

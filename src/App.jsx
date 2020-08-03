@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useStoreon } from 'storeon/react'
 import { Box, Flex, Stack, IconButton, Text, Link } from '@chakra-ui/core'
-import colors from '@livechat/design-system-colors'
+import { ThemeProvider, CSSReset } from '@chakra-ui/core'
+import { StoreProvider } from './store.js'
+import theme from './theme.js'
 import CurrencyCard from './components/currency-card'
-
-const { blue50 } = colors
 
 const App = () => {
 	const { card, rates, dispatch } = useStoreon('card', 'rates')
@@ -44,4 +44,15 @@ const App = () => {
 	)
 }
 
-export default App
+export default () => (
+	<React.StrictMode>
+		<ThemeProvider theme={theme}>
+			<>
+				<CSSReset />
+				<StoreProvider>
+					<App />
+				</StoreProvider>
+			</>
+		</ThemeProvider>
+	</React.StrictMode>
+)
