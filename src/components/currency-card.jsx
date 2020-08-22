@@ -2,15 +2,13 @@ import React from 'react'
 import { useStoreon } from 'storeon/react'
 import useTimeAgo from '@rooks/use-time-ago'
 import {
-    Box,
-    Flex,
-    IconButton,
-    Input,
-    InputGroup,
-    InputRightElement,
-    Stack,
-    Divider,
-    Text,
+	IconButton,
+	Input,
+	InputGroup,
+	InputRightElement,
+	Stack,
+	Divider,
+	Text,
 } from '@chakra-ui/core'
 import NumberFormat from 'react-number-format'
 import propEq from 'ramda/es/propEq'
@@ -21,98 +19,101 @@ import Card from './card'
 import CurrencyPicker from './currency-picker'
 
 const CurrencyInput = ({
-    currency,
-    value,
-    onCurrencyChange,
-    onValueChange,
-    onRemove,
-    ...props
+	currency,
+	value,
+	onCurrencyChange,
+	onValueChange,
+	onRemove,
+	rates,
+	...props
 }) => {
-    const { rates } = useStoreon('card', 'rates')
+	const availableCurrencies = rates.map(({ name }) => name)
 
-    return (
-        <Stack spacing={1} {...props}>
-            <CurrencyPicker
-                rates={rates}
-                onChange={onCurrencyChange}
-                currency={currency}
-            />
+	return (
+		<Stack spacing={1} {...props}>
+			<CurrencyPicker
+				availableCurrencies={availableCurrencies}
+				onChange={onCurrencyChange}
+				currency={currency}
+			/>
 
-            <InputGroup>
-                <NumberFormat
-                    fixedDecimalScale
-                    decimalScale={2}
-                    customInput={Input}
-                    variant="flushed"
-                    size="lg"
-                    value={value}
-                    boxSizing="border-box"
-                    border="none"
-                    fontSize="3xl"
-                    p={0}
-                    onChange={onValueChange}
-                />
-                <InputRightElement>
-                    <IconButton
-                        icon="close"
-                        size="sm"
-                        variant="ghost"
-                        variantColor="red"
-                        onClick={onRemove}
-                    />
-                </InputRightElement>
-            </InputGroup>
-        </Stack>
-    )
+			<InputGroup>
+				<NumberFormat
+					fixedDecimalScale
+					decimalScale={2}
+					customInput={Input}
+					variant="flushed"
+					size="lg"
+					value={value}
+					boxSizing="border-box"
+					border="none"
+					fontSize="3xl"
+					p={0}
+					onChange={onValueChange}
+				/>
+				<InputRightElement>
+					<IconButton
+						icon="close"
+						size="sm"
+						variant="ghost"
+						variantColor="red"
+						onClick={onRemove}
+					/>
+				</InputRightElement>
+			</InputGroup>
+		</Stack>
+	)
 }
 
 const getRate = (rates) => (currency) =>
-    pipe(find(propEq('name', currency)), prop('rate'))(rates)
+	pipe(find(propEq('name', currency)), prop('rate'))(rates)
 
 const CurrencyCard = ({ card, ...props }) => {
-    const { rates, updatedAt, dispatch } = useStoreon('rates', 'updatedAt')
+	const { rates, updatedAt, dispatch } = useStoreon('rates', 'updatedAt')
 
-    const onValueChange = (currency) => ({ target }) =>
-        dispatch('card/amount', {
-            currency,
-            amount: Number(target.value),
-        })
+	const onValueChange = (currency) => ({ target }) =>
+		dispatch('card/amount', {
+			currency,
+			amount: Number(target.value),
+		})
 
-    const onCurrencyChange = (index) => (currency) =>
-        dispatch('card/currency', {
-            index,
-            currency,
-        })
+	const onCurrencyChange = (index) => (currency) =>
+		dispatch('card/currency', {
+			index,
+			currency,
+		})
 
-    const onRemove = (index) => () => dispatch('card/remove', index)
+	const onRemove = (index) => () => dispatch('card/remove', index)
 
-    const getCurrencyRate = getRate(rates)
+	const getCurrencyRate = getRate(rates)
 
-    const timeAgo = useTimeAgo(updatedAt)
-    return (
-        <Card
-            {...props}
-        >
-            <Stack spacing={3}>
-                {card.currencies.map((currency, i) => (
-                    <CurrencyInput
-                        key={currency + i}
-                        currency={currency}
-                        value={getCurrencyRate(currency) * card.amount}
-                        onValueChange={onValueChange(currency)}
-                        onCurrencyChange={onCurrencyChange(i)}
-                        onRemove={onRemove(i)}
-                    />
-                ))}
-            </Stack>
+	const timeAgo = useTimeAgo(updatedAt)
 
-            <Divider />
+	const availableCurrencies = rates.map(({ name }) => name)
 
-            <Text fontSize="sm" color="gray.500">
-                Last updated {timeAgo}
-            </Text>
-        </Card>
-    )
+	return (
+		<Card {...props}>
+			<Stack spacing={3}>
+				{card.currencies.map((currency, i) => (
+					<CurrencyInput
+						key={currency + i}
+						currency={currency}
+						rates={rates}
+						value={getCurrencyRate(currency) * card.amount}
+						onValueChange={onValueChange(currency)}
+						onCurrencyChange={onCurrencyChange(i)}
+						onRemove={onRemove(i)}
+					/>
+				))}
+			</Stack>
+
+			<Divider />
+
+			<Text fontSize="sm" color="gray.500">
+				Last updated {timeAgo}
+			</Text>
+		</Card>
+	)
 }
 
 export default CurrencyCard
