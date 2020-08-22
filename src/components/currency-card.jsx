@@ -2,8 +2,6 @@ import React from 'react'
 import { useStoreon } from 'storeon/react'
 import useTimeAgo from '@rooks/use-time-ago'
 import {
-	Box,
-	Flex,
 	IconButton,
 	Input,
 	InputGroup,
@@ -17,6 +15,7 @@ import propEq from 'ramda/es/propEq'
 import find from 'ramda/es/find'
 import prop from 'ramda/es/prop'
 import pipe from 'ramda/es/pipe'
+import Card from './card'
 import CurrencyPicker from './currency-picker'
 
 const CurrencyInput = ({
@@ -25,19 +24,18 @@ const CurrencyInput = ({
 	onCurrencyChange,
 	onValueChange,
 	onRemove,
+	rates,
 	...props
 }) => {
-	const { rates } = useStoreon('card', 'rates')
+	const availableCurrencies = rates.map(({ name }) => name)
 
 	return (
 		<Stack spacing={1} {...props}>
-			<Flex justifyContent="space-between">
-				<CurrencyPicker
-					rates={rates}
-					onChange={onCurrencyChange}
-					currency={currency}
-				/>
-			</Flex>
+			<CurrencyPicker
+				availableCurrencies={availableCurrencies}
+				onChange={onCurrencyChange}
+				currency={currency}
+			/>
 
 			<InputGroup>
 				<NumberFormat
@@ -90,20 +88,17 @@ const CurrencyCard = ({ card, ...props }) => {
 	const getCurrencyRate = getRate(rates)
 
 	const timeAgo = useTimeAgo(updatedAt)
+
+	const availableCurrencies = rates.map(({ name }) => name)
+
 	return (
-		<Box
-			position="relative"
-			bg="white"
-			p={3}
-			border="1px"
-			borderRadius="lg"
-			{...props}
-		>
+		<Card {...props}>
 			<Stack spacing={3}>
 				{card.currencies.map((currency, i) => (
 					<CurrencyInput
 						key={currency + i}
 						currency={currency}
+						rates={rates}
 						value={getCurrencyRate(currency) * card.amount}
 						onValueChange={onValueChange(currency)}
 						onCurrencyChange={onCurrencyChange(i)}
@@ -117,7 +112,7 @@ const CurrencyCard = ({ card, ...props }) => {
 			<Text fontSize="sm" color="gray.500">
 				Last updated {timeAgo}
 			</Text>
-		</Box>
+		</Card>
 	)
 }
 

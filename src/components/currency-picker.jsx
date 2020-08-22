@@ -9,9 +9,9 @@ import {
 	MenuDivider,
 } from '@chakra-ui/core'
 
-const CurrencyPicker = ({ rates, currency, onChange }) => {
-	const favorites = ['EUR', 'USD', 'GBP', 'CAD']
+const favorites = ['EUR', 'USD', 'GBP', 'CAD']
 
+const CurrencyPicker = ({ availableCurrencies, currency, onChange }) => {
 	return (
 		<Menu>
 			<MenuButton
@@ -30,9 +30,9 @@ const CurrencyPicker = ({ rates, currency, onChange }) => {
 					</MenuItem>
 				))}
 				<MenuDivider borderColor="#ccc" />
-				{rates.map(({ name }) => (
-					<MenuItem key={name} onClick={() => onChange(name)}>
-						{name}
+				{availableCurrencies.map((currency) => (
+					<MenuItem key={currency} onClick={() => onChange(currency)}>
+						{currency}
 					</MenuItem>
 				))}
 			</MenuList>
