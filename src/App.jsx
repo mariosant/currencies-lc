@@ -33,9 +33,12 @@ const App = () => {
 			</Stack>
 			<Box>
 				<Text fontSize="sm" color="gray.400">
-					Join our{' '}
-					<Link href="https://spectrum.chat/currencies-for-lc" target="_blank">
-						Spectrum community
+					<Link
+						textDecoration="underline"
+						href="https://www.livechat.com/community/"
+						isExternal
+					>
+						Join our community
 					</Link>{' '}
 					for feedback & support
 				</Text>
