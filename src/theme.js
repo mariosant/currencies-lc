@@ -24,7 +24,7 @@ const theme = {
 	fontWeights: {
 		normal: 400,
 		medium: 600,
-		bold: 700,
+		bold: 600,
 	},
 	colors: {
 		...defaultTheme.colors,
