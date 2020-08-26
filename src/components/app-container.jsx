@@ -5,8 +5,9 @@ const AppContainer = (props) => (
 	<Flex
 		flexDir="column"
 		justifyContent="space-between"
-		py={5}
-		px={3}
+		paddingTop="14px"
+		paddingBottom={3}
+		px={2}
 		bg="bodyBackground"
 		minHeight="100vh"
 		{...props}
