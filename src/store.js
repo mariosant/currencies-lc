@@ -5,11 +5,13 @@ import { storeonLogger } from 'storeon/devtools'
 import card from './store-modules/card.js'
 import currencies from './store-modules/currencies.js'
 import auth from './store-modules/auth.js'
+import logrocket from './store-modules/logrocket.js'
 
 const { SNOWPACK_PUBLIC_PRODUCTION } = import.meta.env
 
 const plugins = [
 	!SNOWPACK_PUBLIC_PRODUCTION && storeonLogger,
+	logrocket,
 	auth,
 	card,
 	currencies,
