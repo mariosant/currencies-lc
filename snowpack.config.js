@@ -10,5 +10,8 @@ module.exports = {
 	devOptions: {
 		open: 'none',
 		out: 'build'
+	},
+	buildOptions: {
+		sourceMaps: true
 	}
 }
