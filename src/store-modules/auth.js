@@ -4,10 +4,6 @@ import ky from 'ky'
 const { SNOWPACK_PUBLIC_LC_CLIENT_ID } = import.meta.env
 const accountsUri = 'https://accounts.livechatinc.com'
 
-const redirectToAccounts = () => {
-	window.location.href = `${authInstance.token.getUri()}`
-}
-
 const getAuthToken = () => {
 	const authInstance = new ClientOauth2({
 		clientId: SNOWPACK_PUBLIC_LC_CLIENT_ID,
@@ -28,7 +24,7 @@ const getAuthToken = () => {
 				.json()
 		)
 		.catch(() => {
-			redirectToAccounts()
+			window.location.href = `${authInstance.token.getUri()}`
 		})
 }
 
