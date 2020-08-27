@@ -5,7 +5,11 @@ const auth = (store) => {
 	const authInstance = accountsSdk.init({
 		client_id: SNOWPACK_PUBLIC_LC_CLIENT_ID,
 		onIdentityFetched: (error, data) => {
-			store.dispatch('auth/set', data)
+			if (error) {
+				store.dispatch('error', error)
+			} else {
+				store.dispatch('auth/set', data)
+			}
 		},
 	})
 
