@@ -14,7 +14,7 @@ const currencies = (store) => {
 		setInterval(() => store.dispatch('currencies/fetch'), 10 * 60 * 1000)
 
 		return {
-			rates: undefined
+			rates: undefined,
 		}
 	})
 
