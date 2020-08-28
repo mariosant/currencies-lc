@@ -37,10 +37,10 @@ const Layout = ({ children }) => (
 )
 
 const App = () => {
-	const { card, rates, dispatch } = useStoreon('card', 'rates')
+	const { auth, card, rates, dispatch } = useStoreon('auth', 'card', 'rates')
 	const addCard = () => dispatch('card/add')
 
-	return rates ? (
+	return (auth && rates) ? (
 		<Layout>
 			<AppHeader>Currencies</AppHeader>
 			<CurrencyCard card={card} />
