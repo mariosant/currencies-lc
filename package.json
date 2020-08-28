@@ -12,6 +12,7 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@rooks/use-time-ago": "^3.6.0",
+    "@storeon/localstorage": "^1.2.0",
     "@storeon/router": "^1.2.0",
     "axios": "^0.19.2",
     "client-oauth2": "^4.3.3",
