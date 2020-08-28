@@ -8,6 +8,7 @@ import AppContainer from './components/app-container.jsx'
 import CurrencyCard from './components/currency-card.jsx'
 import AddButton from './components/add-button.jsx'
 import Link from './components/link.jsx'
+import Pending from './components/pending.jsx'
 
 const AppHeader = (props) => (
 	<Heading as="h1" size="lg" px={3} {...props}>
@@ -21,29 +22,37 @@ const FooterText = (props) => (
 	</Text>
 )
 
+const Layout = ({ children }) => (
+	<AppContainer>
+		<Stack spacing={5}>{children}</Stack>
+		<Box>
+			<FooterText>
+				<Link href="https://www.livechat.com/community/" isExternal>
+					Join our community
+				</Link>{' '}
+				for feedback & support
+			</FooterText>
+		</Box>
+	</AppContainer>
+)
+
 const App = () => {
 	const { card, rates, dispatch } = useStoreon('card', 'rates')
-
 	const addCard = () => dispatch('card/add')
 
-	return (
-		<AppContainer>
-			<Stack spacing={5}>
-				<AppHeader>Currencies</AppHeader>
-				<CurrencyCard card={card} />
-				<Box textAlign="center">
-					<AddButton onClick={addCard} />
-				</Box>
-			</Stack>
-			<Box>
-				<FooterText>
-					<Link href="https://www.livechat.com/community/" isExternal>
-						Join our community
-					</Link>{' '}
-					for feedback & support
-				</FooterText>
+	return rates ? (
+		<Layout>
+			<AppHeader>Currencies</AppHeader>
+			<CurrencyCard card={card} />
+			<Box textAlign="center">
+				<AddButton onClick={addCard} />
 			</Box>
-		</AppContainer>
+		</Layout>
+	) : (
+		<Layout>
+			<AppHeader>Currencies</AppHeader>
+			<Pending />
+		</Layout>
 	)
 }
 
