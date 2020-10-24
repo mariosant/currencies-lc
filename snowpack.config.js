@@ -9,9 +9,9 @@ module.exports = {
 	},
 	devOptions: {
 		open: 'none',
-		out: 'build'
+		out: 'build',
 	},
 	buildOptions: {
-		sourceMaps: true
-	}
+		sourceMaps: true,
+	},
 }
