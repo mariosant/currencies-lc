@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react'
+import * as React from 'react'
 import { useStoreon } from 'storeon/react'
-import { Box, Flex, Stack, Text, Heading } from '@chakra-ui/core'
+import {
+	Flex,
+	Stack,
+	Text,
+	Heading,
+	Button,
+} from '@chakra-ui/core'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
 import { StoreProvider } from './store.js'
 import theme from './theme.js'
 import AppContainer from './components/app-container.jsx'
 import CurrencyCard from './components/currency-card.jsx'
-import AddButton from './components/add-button.jsx'
 import Link from './components/link.jsx'
 import Pending from './components/pending.jsx'
 
 const AppHeader = (props) => (
-	<Heading as="h1" size="lg" px={3} {...props}>
+	<Heading as="h1" size="lg" {...props}>
 		{props.children}
 	</Heading>
 )
 
 const FooterText = (props) => (
-	<Text fontSize="sm" color="gray.400" {...props}>
+	<Text color="gray.400" textAlign="center" {...props}>
 		{props.children}
 	</Text>
 )
@@ -25,14 +30,12 @@ const FooterText = (props) => (
 const Layout = ({ children }) => (
 	<AppContainer>
 		<Stack spacing={5}>{children}</Stack>
-		<Box>
-			<FooterText>
-				<Link href="https://www.livechat.com/community/" isExternal>
-					Join our community
-				</Link>{' '}
-				for feedback & support
-			</FooterText>
-		</Box>
+		<FooterText>
+			⚡ by{' '}
+			<Link href="https://mariosant.dev" isExternal>
+				mariosant
+			</Link>
+		</FooterText>
 	</AppContainer>
 )
 
@@ -42,11 +45,14 @@ const App = () => {
 
 	return auth && rates ? (
 		<Layout>
-			<AppHeader>Currencies</AppHeader>
+			<Flex px={3} justifyContent="space-between" alignItems="baseline">
+				<AppHeader>Currencies</AppHeader>
+
+				<Button onClick={addCard} variant="link" variantColor="blue">
+					+ Add Currency
+				</Button>
+			</Flex>
 			<CurrencyCard card={card} />
-			<Box textAlign="center">
-				<AddButton onClick={addCard} />
-			</Box>
 		</Layout>
 	) : (
 		<Layout>

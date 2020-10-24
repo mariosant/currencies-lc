@@ -9,7 +9,7 @@ import logrocket from './store-modules/logrocket.js'
 
 const { SNOWPACK_PUBLIC_PRODUCTION } = import.meta.env
 
-const plugins = [logrocket, auth, card, currencies, persistState(['card'])]
+const plugins = [auth, card, currencies, persistState(['card'])]
 
 const store = createStoreon(plugins)
 
