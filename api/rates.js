@@ -8,7 +8,7 @@ const getData = () => axios.get(ratesUrl)
 module.exports = async (req, res) => {
 	const { data } = await getData()
 
-	res.setHeader('Cache-Control', 's-maxage=3600')
+	res.setHeader('Cache-Control', 's-maxage=7200')
 
 	res.json({
 		...data,
